@@ -1,12 +1,17 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs, useRouter } from "expo-router";
+import { Redirect, Tabs, useRouter } from "expo-router";
 import { Pressable, Text } from "react-native";
 import { COLORS } from "../../constants/theme";
 import { useAuth } from "../../context/AuthContext";
 
 export default function TabsLayout() {
   const router = useRouter();
-  const { logout } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
+
+  // Not logged in? Send the user to the login screen instead of showing app screens.
+  if (!isLoggedIn) {
+    return <Redirect href="/login" />;
+  }
 
   function handleLogout() {
     logout();
