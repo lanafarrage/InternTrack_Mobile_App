@@ -20,7 +20,7 @@ export default function Login() {
   async function handleLogin() {
     setLoginError("");
 
-    // 1. Validate the format with Zod.
+    
     const result = loginSchema.safeParse({ email, password });
     if (!result.success) {
       const fieldErrors = result.error.flatten().fieldErrors;
@@ -32,7 +32,7 @@ export default function Login() {
     }
     setErrors({});
 
-    // 2. Compare against the demo account and registered accounts.
+    
     setIsLoggingIn(true);
     const success = await login(result.data.email, result.data.password);
     setIsLoggingIn(false);

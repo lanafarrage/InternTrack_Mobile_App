@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export type StoredUser = {
   name: string;
   email: string;
-  password: string; // plain text: acceptable for a mock app only
+  password: string; 
 };
 
 const USERS_KEY = "interntrack:users";

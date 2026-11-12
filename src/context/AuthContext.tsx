@@ -9,7 +9,7 @@ type AuthContextType = {
   user: User | null;
   userName: string;
   login: (email: string, password: string) => Promise<boolean>;
-  // Returns an error message, or null if the account was created.
+ 
   signup: (name: string, email: string, password: string) => Promise<string | null>;
   logout: () => void;
 };
@@ -22,7 +22,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   async function login(email: string, password: string): Promise<boolean> {
     const normalizedEmail = email.trim().toLowerCase();
 
-    // 1. The predefined demo account.
+
     if (
       normalizedEmail === MOCK_USER.email.toLowerCase() &&
       password === MOCK_USER.password
@@ -31,7 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return true;
     }
 
-    // 2. Accounts created through the Sign Up screen.
+    
     try {
       const users = await loadUsers();
       const match = users.find(
@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return true;
       }
     } catch {
-      // Storage failed: treat as a failed login.
+      
     }
     return false;
   }

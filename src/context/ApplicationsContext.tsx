@@ -35,7 +35,7 @@ export function ApplicationsProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Runs whenever the logged-in user changes: restore that user's saved data.
+  
   useEffect(() => {
     if (email === null) {
       setApplications([]);
@@ -53,7 +53,7 @@ export function ApplicationsProvider({ children }: { children: ReactNode }) {
         if (cancelled) return;
 
         if (saved === null) {
-          // First login for this account: demo user gets mock data, others start empty.
+          
           const initial =
             userEmail.toLowerCase() === MOCK_USER.email.toLowerCase()
               ? mockApplications
@@ -61,7 +61,7 @@ export function ApplicationsProvider({ children }: { children: ReactNode }) {
           await saveApplications(userEmail, initial);
           if (!cancelled) setApplications(initial);
         } else {
-          // Could be [] if the user deleted everything: that is respected.
+          
           setApplications(saved);
         }
       } catch {
@@ -77,8 +77,7 @@ export function ApplicationsProvider({ children }: { children: ReactNode }) {
     };
   }, [email]);
 
-  // Saves first, and only updates state if saving worked,
-  // so what you see on screen always matches what is stored.
+  
   async function persist(next: Application[]): Promise<boolean> {
     if (email === null) return false;
     try {

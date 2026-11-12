@@ -8,14 +8,14 @@ export default function TabsLayout() {
   const router = useRouter();
   const { isLoggedIn, logout } = useAuth();
 
-  // Not logged in? Send the user to the login screen instead of showing app screens.
+  
   if (!isLoggedIn) {
     return <Redirect href="/login" />;
   }
 
   function handleLogout() {
     logout();
-    router.replace("/"); // back to Welcome; no way to go "back" into the app
+    router.replace("/"); 
   }
 
   return (

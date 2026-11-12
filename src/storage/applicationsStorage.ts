@@ -4,8 +4,7 @@ import { Application } from "../types/application";
 const keyFor = (email: string) =>
   `interntrack:applications:${email.trim().toLowerCase()}`;
 
-// Returns null if this user has never saved anything (first login).
-// Returns [] if the user saved an empty list on purpose.
+
 export async function loadApplications(
   email: string
 ): Promise<Application[] | null> {
