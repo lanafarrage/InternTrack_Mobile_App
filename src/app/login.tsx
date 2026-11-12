@@ -15,8 +15,9 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [loginError, setLoginError] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  function handleLogin() {
+  async function handleLogin() {
     setLoginError("");
 
     // 1. Validate the format with Zod.
@@ -31,8 +32,11 @@ export default function Login() {
     }
     setErrors({});
 
-    // 2. Compare against the mock credentials.
-    const success = login(result.data.email, result.data.password);
+    // 2. Compare against the demo account and registered accounts.
+    setIsLoggingIn(true);
+    const success = await login(result.data.email, result.data.password);
+    setIsLoggingIn(false);
+
     if (success) {
       router.replace("/dashboard");
     } else {
@@ -71,7 +75,11 @@ export default function Login() {
 
         {loginError ? <Text style={styles.loginError}>{loginError}</Text> : null}
 
-        <PrimaryButton title="Log in" onPress={handleLogin} />
+        <PrimaryButton title="Log in" onPress={handleLogin} loading={isLoggingIn} />
+
+        <Text style={styles.link} onPress={() => router.replace("/signup")}>
+          Don't have an account? Sign up
+        </Text>
       </View>
     </KeyboardAvoidingView>
   );
@@ -83,4 +91,5 @@ const styles = StyleSheet.create({
   heading: { fontSize: 28, fontWeight: "800", color: COLORS.primary, marginBottom: SPACING.xs },
   subheading: { fontSize: 16, color: COLORS.textMuted, marginBottom: SPACING.lg },
   loginError: { color: COLORS.danger, fontSize: 14, marginBottom: SPACING.md },
+  link: { textAlign: "center", color: COLORS.primary, fontWeight: "600", marginTop: SPACING.lg },
 });

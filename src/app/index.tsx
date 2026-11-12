@@ -18,7 +18,14 @@ export default function Welcome() {
         </Text>
       </View>
 
-      <PrimaryButton title="Get Started" onPress={() => router.push("/login")} />
+      <View style={{ gap: 12 }}>
+        <PrimaryButton title="Log in" onPress={() => router.push("/login")} />
+        <PrimaryButton
+          title="Create account"
+          variant="secondary"
+          onPress={() => router.push("/signup")}
+        />
+      </View>
     </View>
   );
 }
