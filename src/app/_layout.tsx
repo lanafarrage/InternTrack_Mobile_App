@@ -1,13 +1,19 @@
 import { Stack } from "expo-router";
+import { ApplicationsProvider } from "../context/ApplicationsContext";
+import { AuthProvider } from "../context/AuthContext";
 
 export default function Layout() {
   return (
-    <Stack
-      screenOptions={{
-        headerStyle: { backgroundColor: "#ffffff" },
-        headerTintColor: "#1e3a8a",
-        headerTitleStyle: { fontWeight: "bold" },
-      }}
-    />
+    <AuthProvider>
+      <ApplicationsProvider>
+        <Stack
+          screenOptions={{
+            headerStyle: { backgroundColor: "#ffffff" },
+            headerTintColor: "#1e3a8a",
+            headerTitleStyle: { fontWeight: "bold" },
+          }}
+        />
+      </ApplicationsProvider>
+    </AuthProvider>
   );
 }
