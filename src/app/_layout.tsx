@@ -12,7 +12,9 @@ export default function Layout() {
             headerTintColor: "#1e3a8a",
             headerTitleStyle: { fontWeight: "bold" },
           }}
-        />
+        >
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
       </ApplicationsProvider>
     </AuthProvider>
   );

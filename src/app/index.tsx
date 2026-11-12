@@ -1,50 +1,47 @@
+import { Stack, useRouter } from "expo-router";
+import { StyleSheet, Text, View } from "react-native";
+import PrimaryButton from "../components/PrimaryButton";
+import { COLORS, SPACING } from "../constants/theme";
 
-import { Stack } from "expo-router";
-import { useState } from "react";
-import { Button, Image, StyleSheet, Text, View } from "react-native";
-
-function LogoTitle() {
-  return (
-    <Image
-      style={styles.image}
-      source={{ uri: "https://www.haigazian.edu.lb/wp-content/uploads/2018/11/HU-LOGO-Without-Background.png" }}
-    />
-  );
-}
-
-export default function Index() {
-  const [count, setCount] = useState(0);
+export default function Welcome() {
+  const router = useRouter();
 
   return (
-    <>
-      <Stack.Screen
-        options={{
-          headerTitle: () => <LogoTitle />,
-          headerRight: () => (
-            <Button
-              onPress={() => setCount(c => c + 1)}
-              title="Update count"
-            />
-          ),
-        }}
-      />
+    <View style={styles.container}>
+      <Stack.Screen options={{ headerShown: false }} />
 
-      <View style={styles.container}>
-        <Text>Welcome to mobile</Text>
-        <Text>Count: {count}</Text>
+      <View style={styles.hero}>
+        <Text style={styles.logo}>InternTrack</Text>
+        <Text style={styles.tagline}>Your Internship Journey, Organized.</Text>
+        <Text style={styles.description}>
+          Keep every internship application, deadline, and status in one place.
+        </Text>
       </View>
-    </>
+
+      <PrimaryButton title="Get Started" onPress={() => router.push("/login")} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1.5,
-    alignItems: "center",
-    justifyContent: "center",
+    flex: 1,
+    backgroundColor: COLORS.background,
+    padding: SPACING.lg,
+    justifyContent: "space-between",
   },
-  image: {
-    width: 100,
-    height: 70,
+  hero: { flex: 1, justifyContent: "center" },
+  logo: {
+    fontSize: 40,
+    fontWeight: "800",
+    color: COLORS.primary,
+    marginBottom: SPACING.sm,
   },
+  tagline: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: COLORS.text,
+    marginBottom: SPACING.md,
+  },
+  description: { fontSize: 16, color: COLORS.textMuted, lineHeight: 24 },
 });
